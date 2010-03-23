@@ -40,7 +40,10 @@ for benchtype in ('sequential', 'random'):
 
                 ps_proc = subprocess.Popen(['ps up %d | tail -n1' % proc.pid], shell=True, stdout=subprocess.PIPE)
                 nbytes = int(ps_proc.stdout.read().split()[4]) * 1024
+                ps_proc.wait()
+
                 os.kill(proc.pid, signal.SIGTERM)
+                proc.wait()
 
                 if nbytes: # otherwise it crashed
                     line = ','.join(map(str, [benchtype, nkeys, program, nbytes, after-before]))
