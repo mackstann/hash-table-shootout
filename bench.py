@@ -19,6 +19,7 @@ interval = 10000000
 #interval = 500000
 # and use nice/ionice
 # and shut down to the console
+# and swapoff any swap files/partitions
 
 outfile = open('output', 'w')
 
