@@ -31,7 +31,7 @@ for benchtype in ('sequential', 'random'):
 
             for attempt in range(3): # best of 3
                 before = time.time()
-                proc = subprocess.Popen(['./'+program, str(nkeys), benchtype], stdout=subprocess.PIPE)
+                proc = subprocess.Popen(['./build/'+program, str(nkeys), benchtype], stdout=subprocess.PIPE)
 
                 # wait for the program to fill up memory and spit out its "ready" message
                 proc.stdout.read(1)
