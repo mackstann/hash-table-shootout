@@ -19,4 +19,5 @@ $ python make_chart_data.py < output | python make_html.py
 Your charts are now in charts.html.
 
 You can tweak some of the values in bench.py to make it run faster at the
-expense of less granular data.
+expense of less granular data, and you might need to tweak some of the tickSize
+settings in charts-template.html.
