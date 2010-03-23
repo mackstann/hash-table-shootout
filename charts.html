@@ -1,0 +1,231 @@
+<html>
+
+    <!-- scroll down to see the place where you need to paste the contents of
+    the chartdata file for this page to function. -->
+
+    <head>
+        <!--[if IE]><script language="javascript" type="text/javascript" src="http://flot.googlecode.com/svn/trunk/excanvas.min.js"></script><![endif]--> 
+        <script language="javascript" type="text/javascript" src="http://flot.googlecode.com/svn/trunk/jquery.js"></script> 
+        <script language="javascript" type="text/javascript" src="http://flot.googlecode.com/svn/trunk/jquery.flot.js"></script> 
+    </head>
+    <body>
+
+<script>
+    series_settings = {
+        lines: { show: true },
+        points: { show: true }
+    };
+
+    xaxis_settings = {
+        tickSize: 5000000,
+        tickFormatter: function(num, obj) { return parseInt(num/1000000) + 'M'; }
+    };
+
+    yaxis_runtime_settings = {
+        tickSize: 10,
+        tickFormatter: function(num, obj) { return num + ' sec.'; }
+    };
+
+    yaxis_memory_settings = {
+        tickSize: 200*1024*1024,
+        tickFormatter: function(num, obj) { return parseInt(num/1024/1024) + 'MiB'; }
+    };
+
+    legend_settings = {
+        position: 'nw',
+        backgroundOpacity: 0
+    };
+
+    runtime_settings = {
+        series: series_settings,
+        xaxis: xaxis_settings,
+        yaxis: yaxis_runtime_settings,
+        legend: legend_settings
+    };
+
+    memory_settings = {
+        series: series_settings,
+        xaxis: xaxis_settings,
+        yaxis: yaxis_memory_settings,
+        legend: legend_settings
+    };
+
+    // paste the chart_data here.
+    // if i have left some existing chart_data here, remove it first and curse me.
+
+chart_data = {
+'random-runtime': [
+{ label: "Google sparsehash 1.5.2 sparse_hash_map", data: [
+[1000000, 0.487504] ,
+[11000000, 7.886007] ,
+[21000000, 16.599270]
+] }
+,
+{ label: "Google sparsehash 1.5.2 dense_hash_map", data: [
+[1000000, 0.139684] ,
+[11000000, 2.139538] ,
+[21000000, 4.874680]
+] }
+,
+{ label: "GCC 4.4 std::unordered_map", data: [
+[1000000, 0.379206] ,
+[11000000, 7.680831] ,
+[21000000, 15.716761]
+] }
+,
+{ label: "Boost 1.38 unordered_map", data: [
+[1000000, 0.438063] ,
+[11000000, 7.885274] ,
+[21000000, 24.378082]
+] }
+,
+{ label: "Python 2.6 (C API) dict", data: [
+[1000000, 0.409540] ,
+[11000000, 5.376057] ,
+[21000000, 10.840325]
+] }
+,
+{ label: "Glib 2.22 GHashTable", data: [
+[1000000, 0.316352] ,
+[11000000, 4.053227] ,
+[21000000, 7.287673]
+] }
+,
+{ label: "Qt 4.5 QHash", data: [
+[1000000, 0.348371] ,
+[11000000, 5.932532] ,
+[21000000, 12.216421]
+] }
+
+]
+,
+'sequential-runtime': [
+{ label: "Google sparsehash 1.5.2 sparse_hash_map", data: [
+[1000000, 0.221959] ,
+[11000000, 2.327066] ,
+[21000000, 4.662238]
+] }
+,
+{ label: "Google sparsehash 1.5.2 dense_hash_map", data: [
+[1000000, 0.047031] ,
+[11000000, 0.758282] ,
+[21000000, 1.560952]
+] }
+,
+{ label: "GCC 4.4 std::unordered_map", data: [
+[1000000, 0.118700] ,
+[11000000, 1.545199] ,
+[21000000, 3.578776]
+] }
+,
+{ label: "Boost 1.38 unordered_map", data: [
+[1000000, 0.146561] ,
+[11000000, 2.013170] ,
+[21000000, 5.863350]
+] }
+,
+{ label: "Python 2.6 (C API) dict", data: [
+[1000000, 0.157306] ,
+[11000000, 1.547232] ,
+[21000000, 4.311919]
+] }
+,
+{ label: "Glib 2.22 GHashTable", data: [
+[1000000, 0.091999] ,
+[11000000, 0.808283] ,
+[21000000, 1.865074]
+] }
+,
+{ label: "Qt 4.5 QHash", data: [
+[1000000, 0.097984] ,
+[11000000, 1.364061] ,
+[21000000, 2.545420]
+] }
+
+]
+,
+'sequential-memory': [
+{ label: "Google sparsehash 1.5.2 sparse_hash_map", data: [
+[1000000, 21069824] ,
+[11000000, 109228032] ,
+[21000000, 198217728]
+] }
+,
+{ label: "Google sparsehash 1.5.2 dense_hash_map", data: [
+[1000000, 28844032] ,
+[11000000, 280502272] ,
+[21000000, 548937728]
+] }
+,
+{ label: "GCC 4.4 std::unordered_map", data: [
+[1000000, 52416512] ,
+[11000000, 507731968] ,
+[21000000, 975773696]
+] }
+,
+{ label: "Boost 1.38 unordered_map", data: [
+[1000000, 56610816] ,
+[11000000, 376553472] ,
+[21000000, 696631296]
+] }
+,
+{ label: "Python 2.6 (C API) dict", data: [
+[1000000, 96931840] ,
+[11000000, 695123968] ,
+[21000000, 1343647744]
+] }
+,
+{ label: "Glib 2.22 GHashTable", data: [
+[1000000, 59535360] ,
+[11000000, 411856896] ,
+[21000000, 814510080]
+] }
+,
+{ label: "Qt 4.5 QHash", data: [
+[1000000, 72732672] ,
+[11000000, 518639616] ,
+[21000000, 972800000]
+] }
+
+]
+
+};
+
+    // end chart_data paste area.
+
+    $(function () {
+        $.plot($("#sequential-runtime"), chart_data['sequential-runtime'], runtime_settings);
+        $.plot($("#random-runtime"),     chart_data['random-runtime'],     runtime_settings);
+        $.plot($("#sequential-memory"),  chart_data['sequential-memory'],  memory_settings);
+    });
+</script> 
+
+<style>
+    body, * { font-family: sans-serif; }
+    div.chart {
+        width: 700px;
+        height: 220px;
+    }
+    div.xaxis-title {
+        width: 700px;
+        text-align: center;
+        font-style: italic;
+        font-size: small;
+        color: #666;
+    }
+</style>
+
+<h2>Sequential Inserts: Execution Time</h2>
+<div class="chart" id="sequential-runtime"></div> 
+<div class="xaxis-title">number of entries in hash table</div>
+
+<h2>Random Inserts: Execution Time</h2>
+<div class="chart" id="random-runtime"></div> 
+<div class="xaxis-title">number of entries in hash table</div>
+
+<h2>Memory Usage</h2>
+<div class="chart" id="sequential-memory"></div> 
+<div class="xaxis-title">number of entries in hash table</div>
+
+</body>
+</html>
