@@ -1,6 +1,22 @@
 How to run these benchmarks:
 
+First, some prerequisites are:
+
+* make
+* gcc and recent g++ (4.3-ish?)
+* python (hard-coded for 2.6 -- edit Makefile to use another version)
+* glib
+* boost
+* google sparsehash
+* qt
+
+Now, run:
+
 $ make
 $ python bench.py
-$ python make_chart_data.py < output > chartdata
-<paste the contents of chartdata into the middle of charts.html>
+$ python make_chart_data.py < output | python make_html.py
+
+Your charts are now in charts.html.
+
+You can tweak some of the values in bench.py to make it run faster at the
+expense of less granular data.
