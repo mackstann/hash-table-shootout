@@ -1,0 +1,6 @@
+How to run these benchmarks:
+
+$ make
+$ python bench.py
+$ python make_chart_data.py < output > chartdata
+<paste the contents of chartdata into the middle of charts.html>
