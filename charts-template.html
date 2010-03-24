@@ -51,6 +51,7 @@
     $(function () {
         $.plot($("#sequential-runtime"), chart_data['sequential-runtime'], runtime_settings);
         $.plot($("#random-runtime"),     chart_data['random-runtime'],     runtime_settings);
+        $.plot($("#delete-runtime"),     chart_data['delete-runtime'],     runtime_settings);
         $.plot($("#sequential-memory"),  chart_data['sequential-memory'],  memory_settings);
     });
 </script> 
@@ -76,6 +77,10 @@
 
 <h2>Random Inserts: Execution Time</h2>
 <div class="chart" id="random-runtime"></div> 
+<div class="xaxis-title">number of entries in hash table</div>
+
+<h2>Deletes: Execution Time</h2>
+<div class="chart" id="delete-runtime"></div> 
 <div class="xaxis-title">number of entries in hash table</div>
 
 <h2>Memory Usage</h2>

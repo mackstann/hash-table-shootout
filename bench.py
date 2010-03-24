@@ -1,4 +1,4 @@
-import sys, os, subprocess, signal, time
+import sys, os, subprocess, signal
 
 programs = [
     'glib_hash_table',
@@ -23,10 +23,10 @@ interval = 500000
 
 outfile = open('output', 'w')
 
-if len(sys.argv > 1):
+if len(sys.argv) > 1:
     benchtypes = sys.argv[1:]
 else:
-    benchtypes = ('sequential', 'random')
+    benchtypes = ('sequential', 'random', 'delete')
 
 for benchtype in benchtypes:
     nkeys = minkeys
@@ -36,12 +36,10 @@ for benchtype in benchtypes:
             fastest_attempt_data = ''
 
             for attempt in range(3): # best of 3
-                before = time.time()
                 proc = subprocess.Popen(['./build/'+program, str(nkeys), benchtype], stdout=subprocess.PIPE)
 
                 # wait for the program to fill up memory and spit out its "ready" message
-                proc.stdout.read(1)
-                after = time.time()
+                runtime = float(proc.stdout.readline().strip())
 
                 ps_proc = subprocess.Popen(['ps up %d | tail -n1' % proc.pid], shell=True, stdout=subprocess.PIPE)
                 nbytes = int(ps_proc.stdout.read().split()[4]) * 1024
@@ -51,10 +49,10 @@ for benchtype in benchtypes:
                 proc.wait()
 
                 if nbytes: # otherwise it crashed
-                    line = ','.join(map(str, [benchtype, nkeys, program, nbytes, after-before]))
+                    line = ','.join(map(str, [benchtype, nkeys, program, nbytes, runtime]))
 
-                    if after-before < fastest_attempt:
-                        fastest_attempt = after-before
+                    if runtime < fastest_attempt:
+                        fastest_attempt = runtime
                         fastest_attempt_data = line
 
             if fastest_attempt != 1000000:

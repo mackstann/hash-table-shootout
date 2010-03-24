@@ -8,4 +8,8 @@ typedef PyObject * hash_t;
         PyObject * py_int_key = PyInt_FromLong(key); /* leak */ \
         PyDict_SetItem(hash, py_int_key, py_int_value); \
     } while(0)
+#define DELETE_FROM_HASH(key) do { \
+        PyObject * py_int_key = PyInt_FromLong(key); /* leak */ \
+        PyDict_DelItem(hash, py_int_key); \
+    } while(0)
 #include "template.c"
