@@ -11,13 +11,16 @@ programs = [
     'ruby_hash',
 ]
 
-minkeys = 500000
-maxkeys = 50*1000*1000
-interval = 500000
+minkeys  =  2*1000*1000
+maxkeys  = 40*1000*1000
+interval =  2*1000*1000
+best_out_of = 3
 
 # for the final run, use this:
-#maxkeys = 40*1000*1000
-#interval = 500000
+#minkeys  =  2*1000*1000
+#maxkeys  = 40*1000*1000
+#interval =  2*1000*1000
+#best_out_of = 3
 # and use nice/ionice
 # and shut down to the console
 # and swapoff any swap files/partitions
@@ -36,7 +39,7 @@ for benchtype in benchtypes:
             fastest_attempt = 1000000
             fastest_attempt_data = ''
 
-            for attempt in range(3): # best of 3
+            for attempt in range(best_out_of):
                 proc = subprocess.Popen(['./build/'+program, str(nkeys), benchtype], stdout=subprocess.PIPE)
 
                 # wait for the program to fill up memory and spit out its "ready" message
