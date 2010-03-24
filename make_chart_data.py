@@ -45,6 +45,7 @@ proper_names = {
     'glib_hash_table': 'Glib 2.22 GHashTable',
     'qt_qhash': 'Qt 4.5 QHash',
     'python_dict': 'Python 2.6 (C API) dict',
+    'ruby_hash': 'Ruby 1.9 (C API) hash',
 }
 
 # do them in the desired order to make the legend not overlap the chart data
@@ -55,6 +56,7 @@ program_slugs = [
     'stl_unordered_map',
     'boost_unordered_map',
     'python_dict',
+    'ruby_hash',
     'glib_hash_table',
     'qt_qhash',
 ]

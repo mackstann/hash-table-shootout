@@ -12,6 +12,8 @@
         points: { show: true }
     };
 
+    grid_settings = { tickColor: '#ddd' };
+
     xaxis_settings = {
         tickSize: 5000000,
         tickFormatter: function(num, obj) { return parseInt(num/1000000) + 'M'; }
@@ -34,6 +36,7 @@
 
     runtime_settings = {
         series: series_settings,
+        grid: grid_settings,
         xaxis: xaxis_settings,
         yaxis: yaxis_runtime_settings,
         legend: legend_settings
@@ -41,6 +44,7 @@
 
     memory_settings = {
         series: series_settings,
+        grid: grid_settings,
         xaxis: xaxis_settings,
         yaxis: yaxis_memory_settings,
         legend: legend_settings
@@ -64,7 +68,7 @@
     body, * { font-family: sans-serif; }
     div.chart {
         width: 700px;
-        height: 200px;
+        height: 230px;
     }
     div.xaxis-title {
         width: 700px;

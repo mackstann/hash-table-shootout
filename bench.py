@@ -8,6 +8,7 @@ programs = [
     'google_dense_hash_map',
     'qt_qhash',
     'python_dict',
+    'ruby_hash',
 ]
 
 minkeys = 500000
@@ -45,11 +46,11 @@ for benchtype in benchtypes:
                 nbytes = int(ps_proc.stdout.read().split()[4]) * 1024
                 ps_proc.wait()
 
-                os.kill(proc.pid, signal.SIGTERM)
+                os.kill(proc.pid, signal.SIGKILL)
                 proc.wait()
 
                 if nbytes: # otherwise it crashed
-                    line = ','.join(map(str, [benchtype, nkeys, program, nbytes, runtime]))
+                    line = ','.join(map(str, [benchtype, nkeys, program, nbytes, "%0.6f" % runtime]))
 
                     if runtime < fastest_attempt:
                         fastest_attempt = runtime
