@@ -21,7 +21,7 @@
 # random,20971520,google_dense_hash_map,548937728,4.85360789299
 # random,41943040,glib_hash_table,1619816448,90.6313672066
 
-import sys
+import sys, json
 
 lines = [ line.strip() for line in sys.stdin if line.strip() ]
 
@@ -59,36 +59,18 @@ program_slugs = [
     'qt_qhash',
 ]
 
-print 'chart_data = {'
+chart_data = {}
+
 for i, (benchtype, programs) in enumerate(by_benchtype.items()):
-    print "'%s': [" % benchtype
+    chart_data[benchtype] = []
     for j, program in enumerate(program_slugs):
         data = programs[program]
-        print '{ label: "%s", data: [' % proper_names[program]
+        chart_data[benchtype].append({
+            'label': proper_names[program],
+            'data': [],
+        })
 
         for k, (nkeys, value) in enumerate(data):
-            if benchtype.endswith('-runtime'):
-                print '[%d, %f]' % (nkeys, value),
-            else:
-                print '[%d, %d]' % (nkeys, value),
+            chart_data[benchtype][-1]['data'].append([nkeys, value])
 
-            if k != len(data)-1:
-                print ','
-            else:
-                print
-
-        print '] }'
-
-        if j != len(programs)-1:
-            print ','
-        else:
-            print
-
-    print ']'
-
-    if i != len(by_benchtype)-1:
-        print ','
-    else:
-        print
-
-print '};'
+print 'chart_data = ' + json.dumps(chart_data)
