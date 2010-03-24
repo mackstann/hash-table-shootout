@@ -1,4 +1,4 @@
-import os, subprocess, signal, time
+import sys, os, subprocess, signal, time
 
 programs = [
     'glib_hash_table',
@@ -10,9 +10,9 @@ programs = [
     'python_dict',
 ]
 
-minkeys = 1000*1000
-maxkeys = 21*1000*1000
-interval = 10000000
+minkeys = 500000
+maxkeys = 50*1000*1000
+interval = 500000
 
 # for the final run, use this:
 #maxkeys = 40*1000*1000
@@ -23,7 +23,12 @@ interval = 10000000
 
 outfile = open('output', 'w')
 
-for benchtype in ('sequential', 'random'):
+if len(sys.argv > 1):
+    benchtypes = sys.argv[1:]
+else:
+    benchtypes = ('sequential', 'random')
+
+for benchtype in benchtypes:
     nkeys = minkeys
     while nkeys <= maxkeys:
         for program in programs:
