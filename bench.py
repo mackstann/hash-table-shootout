@@ -26,7 +26,7 @@ outfile = open('output', 'w')
 if len(sys.argv) > 1:
     benchtypes = sys.argv[1:]
 else:
-    benchtypes = ('sequential', 'random', 'delete')
+    benchtypes = ('sequential', 'random', 'delete', 'sequentialstring', 'randomstring', 'deletestring')
 
 for benchtype in benchtypes:
     nkeys = minkeys

@@ -34,7 +34,7 @@ for line in lines:
     runtime = float(runtime)
 
     by_benchtype.setdefault("%s-runtime" % benchtype, {}).setdefault(program, []).append([nkeys, runtime])
-    if benchtype == 'sequential':
+    if benchtype.startswith('sequential'):
         by_benchtype.setdefault("%s-memory"  % benchtype, {}).setdefault(program, []).append([nkeys, nbytes])
 
 proper_names = {
