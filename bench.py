@@ -14,7 +14,7 @@ programs = [
 minkeys  =  2*1000*1000
 maxkeys  = 40*1000*1000
 interval =  2*1000*1000
-best_out_of = 3
+best_out_of = 2
 
 # for the final run, use this:
 #minkeys  =  2*1000*1000
@@ -43,7 +43,10 @@ for benchtype in benchtypes:
                 proc = subprocess.Popen(['./build/'+program, str(nkeys), benchtype], stdout=subprocess.PIPE)
 
                 # wait for the program to fill up memory and spit out its "ready" message
-                runtime = float(proc.stdout.readline().strip())
+                try:
+                    runtime = float(proc.stdout.readline().strip())
+                except:
+                    runtime = 0
 
                 ps_proc = subprocess.Popen(['ps up %d | tail -n1' % proc.pid], shell=True, stdout=subprocess.PIPE)
                 nbytes = int(ps_proc.stdout.read().split()[4]) * 1024
@@ -52,7 +55,7 @@ for benchtype in benchtypes:
                 os.kill(proc.pid, signal.SIGKILL)
                 proc.wait()
 
-                if nbytes: # otherwise it crashed
+                if nbytes and runtime: # otherwise it crashed
                     line = ','.join(map(str, [benchtype, nkeys, program, nbytes, "%0.6f" % runtime]))
 
                     if runtime < fastest_attempt:
