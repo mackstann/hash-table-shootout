@@ -29,3 +29,10 @@ To run the benchmark at the highest priority possible, do this:
 You might also want to disable any swap files/partitions so that swapping
 doesn't influence performance.  (The programs will just die if they try to
 allocate too much memory.)
+
+Copyright Information
+=====================
+
+Written by Nick Welch in 2010.
+No copyright.  This work is dedicated to the public domain.
+For full details, see http://creativecommons.org/publicdomain/zero/1.0/
